@@ -2,43 +2,85 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
- * ATM interface contains methods of ATM
+ * ATM interface defines the basic operations that can be performed on an ATM.
+ * This includes authentication, withdrawal, deposit, and balance inquiry.
  */
 interface ATM {
+    /**
+     * Authenticates the user using a PIN.
+     *
+     * @param pin The PIN provided by the user for authentication.
+     * @throws AuthenticationException If the authentication fails due to an incorrect PIN or other issues.
+     */
     void authenticate(String pin) throws AuthenticationException;
 
+    /**
+     * Withdraws a specified amount from the account.
+     *
+     * @param amount The amount to be withdrawn.
+     * @throws InsufficientBalanceException If there is not enough balance in the account to perform the withdrawal.
+     */
     void withdraw(double amount) throws InsufficientBalanceException;
 
+    /**
+     * Deposits a specified amount into the account.
+     *
+     * @param amount The amount to be deposited.
+     */
     void deposit(double amount);
 
+    /**
+     * Returns the current balance of the account.
+     *
+     * @return The balance of the account.
+     */
     double getBalance();
 }
 
+/**
+ * InsufficientBalanceException is thrown when an operation is attempted that would cause the account balance to drop below zero.
+ */
 class InsufficientBalanceException extends Exception {
+    /**
+     * Constructs a new InsufficientBalanceException with the specified detail message.
+     *
+     * @param message The detail message.
+     */
     public InsufficientBalanceException(String message) {
         super(message);
     }
 }
 
+/**
+ * AuthenticationException is thrown when authentication fails, such as when an incorrect PIN is entered.
+ */
 class AuthenticationException extends Exception {
+    /**
+     * Constructs a new AuthenticationException with the specified detail message.
+     *
+     * @param message The detail message.
+     */
     public AuthenticationException(String message) {
         super(message);
     }
 }
 
+/**
+ * BankAccount class implements the ATM interface and represents a simple bank account with basic functionality such as deposit, withdrawal, and balance checking.
+ */
 class BankAccount implements ATM {
-    private double balance;
-    private String pin;
-    private int failedLoginAttempts;
+    private double balance; // The current balance of the account
+    private String pin; // The PIN for account authentication
+    private int failedLoginAttempts; // Counter for failed login attempts
 
     // Constants for max attempts for authentication configurations
-    private static final int MAX_ATTEMPTS = 3;
+    private static final int MAX_ATTEMPTS = 3; // Maximum allowed failed login attempts
 
     /**
      * Initializes a new bank account with the given balance and PIN.
      *
-     * @param initialBalance the initial balance of the account
-     * @param pin            the account PIN for authentication
+     * @param initialBalance The initial balance of the account.
+     * @param pin The account PIN for authentication.
      */
     public BankAccount(double initialBalance, String pin) {
         this.balance = initialBalance;
@@ -47,10 +89,10 @@ class BankAccount implements ATM {
     }
 
     /**
-     * Authenticate the user with the pin.
-     * 
-     * @param pin
-     * @throws AuthenticationException
+     * Authenticates the user with the provided PIN.
+     *
+     * @param pin The PIN provided by the user.
+     * @throws AuthenticationException If authentication fails or account is locked.
      */
     @Override
     public void authenticate(String pin) throws AuthenticationException {
@@ -69,14 +111,19 @@ class BankAccount implements ATM {
         failedLoginAttempts = 0; // Reset failed attempts on successful authentication
     }
 
+    /**
+     * Checks if the account is locked due to too many failed login attempts.
+     *
+     * @return true if the account is locked, false otherwise.
+     */
     public boolean isLocked() {
         return this.failedLoginAttempts >= MAX_ATTEMPTS;
     }
 
     /**
-     * Deposit amount into the account.
-     * 
-     * @param amount the amount to deposit
+     * Deposits a specified amount into the account.
+     *
+     * @param amount The amount to deposit.
      */
     @Override
     public void deposit(double amount) {
@@ -89,11 +136,10 @@ class BankAccount implements ATM {
     }
 
     /**
-     * Withdraw amount from the account if sufficient balance is available
-     * 
-     * @param amount the amount to withdraw
-     * @throws InsufficientBalanceException if the withdrawal amount is greater than
-     *                                      the balance
+     * Withdraws a specified amount from the account if sufficient balance is available.
+     *
+     * @param amount The amount to withdraw.
+     * @throws InsufficientBalanceException If the withdrawal amount is greater than the balance.
      */
     @Override
     public void withdraw(double amount) throws InsufficientBalanceException {
@@ -111,8 +157,8 @@ class BankAccount implements ATM {
 
     /**
      * Returns the current balance of the account.
-     * 
-     * @return the balance of the account
+     *
+     * @return The balance of the account.
      */
     @Override
     public double getBalance() {
@@ -120,12 +166,17 @@ class BankAccount implements ATM {
     }
 }
 
+/**
+ * ATMmachine class handle user input and invoking the appropriate account operations.
+ */
 public class ATMmachine {
-    private HashMap<String, BankAccount> accounts;
-    private BankAccount currentAccount;
-    private Scanner sc;
+    private HashMap<String, BankAccount> accounts; // HashMap to store user accounts with their ID
+    private BankAccount currentAccount; // The currently authenticated user's account
+    private Scanner sc; // Scanner for user input
 
-    // Initialize some demo accounts
+    /**
+     * Initializes some demo accounts for testing the ATM functionality.
+     */
     public ATMmachine() {
         accounts = new HashMap<>();
         accounts.put("abc", new BankAccount(1000, "123")); // Added initial balance for testing
@@ -133,8 +184,7 @@ public class ATMmachine {
     }
 
     /**
-     * Starts the ATM application and processes user input for various banking
-     * operations.
+     * Starts the ATM application and processes user input for various banking operations.
      */
     private void start() {
         System.out.println("\nWelcome to the ATM!");
@@ -184,9 +234,9 @@ public class ATMmachine {
     }
 
     /**
-     * Authenticate the user by prompting for user ID and PIN.
-     * 
-     * @return true if authentication is successful, false otherwise
+     * Authenticates the user by prompting for a user ID and PIN.
+     *
+     * @return true if authentication is successful, false otherwise.
      */
     private boolean authenticateUser() {
         
@@ -233,8 +283,7 @@ public class ATMmachine {
     }
 
     /**
-     * Handles the deposit operation by prompting for an amount and depositing it
-     * into the user's account.
+     * Handles the deposit operation by prompting for an amount and depositing it into the user's account.
      */
     private void handleDeposit() {
         System.out.print("Enter amount to deposit: ");
@@ -243,8 +292,7 @@ public class ATMmachine {
     }
 
     /**
-     * Handles the withdrawal operation by prompting for an amount and withdrawing
-     * it from the user's account.
+     * Handles the withdrawal operation by prompting for an amount and withdrawing it from the user's account.
      */
     private void handleWithdrawal() {
         System.out.print("Enter amount to withdraw: ");
@@ -257,6 +305,9 @@ public class ATMmachine {
         }
     }
 
+    /**
+     * The main method that starts the ATM application.
+     */
     public static void main(String[] args) {
         ATMmachine atm = new ATMmachine();
         atm.start();
