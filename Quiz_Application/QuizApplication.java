@@ -7,15 +7,10 @@ import java.util.TimerTask;
  * Each question has a time limit for answering, and the user's score is calculated based on correct answers.
  *
  * Features:
- * - Timed questions: Users have a limited time to answer each question.
  * - Multiple-choice questions: Each question has four options.
+ * - Timed questions: Users have a limited time to answer each question.
  * - Score calculation: The user's score is calculated and displayed at the end.
  * - Summary of results: The application shows which questions were answered correctly or incorrectly.
- *
- * Usage:
- * - Compile and run the QuizApplication class.
- * - Follow the prompts to answer each question within the time limit.
- * - At the end of the quiz, the results and score will be displayed.
  *
  * Author: Jevin Morad
  * Date: 6/8/2024
