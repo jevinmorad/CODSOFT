@@ -43,7 +43,7 @@ public class DatabaseManager {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next() && rs.getString(1).equals(name)) {
-                System.out.println("\n--> Other account found with same name. Try again");
+                System.out.println("\n--> Other account found with same name. Try with different name.");
                 return false;
             }
         } catch (Exception e) {
@@ -127,7 +127,7 @@ public class DatabaseManager {
                         rs.getString("course_name"),
                         rs.getString("description"),
                         rs.getInt("capacity"),
-                        rs.getInt("enrolled_student_count"));
+                        rs.getInt("capacity") - rs.getInt("enrolled_student_count"));
                 courses.add(course);
             }
         } catch (SQLException e) {
