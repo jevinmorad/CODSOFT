@@ -1,4 +1,3 @@
-
 /**
  * A simple number guessing game where the user tries to guess a randomly generated number.
  * The game generates a random number within a specified range, and the user attempts to guess it.
@@ -28,16 +27,16 @@ public class NumberGuessingGame {
             int score = playRound(sc, random);
             totalScore += score;
 
-            System.out.println("Your current score is: " + totalScore);
+            System.out.println("\nYour current score is: " + totalScore);
 
             // Ask user to play again
-            System.out.print("Do you want to play again? (yes/no): ");
+            System.out.print("\nDo you want to play again? (yes/no): ");
             String response = sc.next();
             playAgain = response.equalsIgnoreCase("yes");
         }
 
-        System.out.println("\n\nThank you for playing! You played " + totalRounds + " rounds with a total score of "
-                + totalScore + ".");
+        System.out.println("\nYou played " + totalRounds + " rounds with a total score of "
+                + totalScore + ".\nThank you for playing!\n");
 
         sc.close();
     }
@@ -70,7 +69,7 @@ public class NumberGuessingGame {
 
         // Loop until the user either guesses correctly or exhausts all attempts
         while (attempts < maxNumberAttempts && !guessedCorrect) {
-            System.out.print("\nAttempt " + (attempts + 1) + " : ");
+            System.out.print("\nAttempt " + (attempts + 1) + ": ");
             int userGuess = sc.nextInt();
             attempts++;
 
