@@ -18,6 +18,8 @@ public class GradeCalculator {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("\nWelcome to grade calculator.\n");
+
         // Prompt the user for the number of subjects
         System.out.print("Enter the number of subjects: ");
         int numberOfSubjects = sc.nextInt();
@@ -28,7 +30,7 @@ public class GradeCalculator {
 
         // Input marks for each subject
         for (int i = 0; i < numberOfSubjects; i++) {
-            System.out.print("Enter marks for subject " + (i + 1) + " (out of 100): ");
+            System.out.print("\nEnter marks for subject " + (i + 1) + " (out of 100): ");
             marks[i] = sc.nextInt();
             
             // loop until marks is not between 0 to 100
@@ -48,7 +50,7 @@ public class GradeCalculator {
         // Display the results
         System.out.println("\n------------------Results------------------");
         System.out.println("Total Marks: " + totalMarks);
-        System.out.printf("Average Percentage: %.2f%%\n", averagePercentage);
+        System.out.printf("Percentage: %.2f%%\n", averagePercentage);
         System.out.println("Grade: " + grade);
 
         sc.close();
