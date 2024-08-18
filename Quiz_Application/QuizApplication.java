@@ -56,6 +56,7 @@ public class QuizApplication {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("\nWelcome to quiz.\n");
         // Define quiz questions
         Question[] questions = {
                 new Question(
