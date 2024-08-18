@@ -59,7 +59,7 @@ END;
 
 INSERT INTO Students (student_id, student_name)
 VALUES
-    ('1171', 'Jevin'),
+    ('1148', 'Yash'),
     ('1263', 'Bob'),
     ('1358', 'Carol');
 
@@ -71,7 +71,7 @@ VALUES
 
 INSERT INTO Enrollment (student_id, course_code)
 VALUES
-    ('1171', '101'),
-    ('1171', '102'),
+    ('1148', '101'),
+    ('1148', '102'),
     ('1263', '103'),
     ('1358', '101');
