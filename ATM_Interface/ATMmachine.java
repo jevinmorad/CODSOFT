@@ -129,9 +129,9 @@ class BankAccount implements ATM {
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
-            System.out.printf("Successfully deposited $%.2f\n", amount);
+            System.out.printf("\nSuccessfully deposited $%.2f\n", amount);
         } else {
-            System.out.println("Deposit amount must be positive.");
+            System.out.println("\nDeposit amount must be positive.");
         }
     }
 
@@ -146,12 +146,12 @@ class BankAccount implements ATM {
         if (amount > 0) {
             if (amount <= balance) {
                 balance -= amount;
-                System.out.printf("Successfully withdrew $%.2f\n", amount);
+                System.out.printf("\nSuccessfully withdrew $%.2f\n", amount);
             } else {
                 throw new InsufficientBalanceException("Insufficient balance for withdrawal.");
             }
         } else {
-            System.out.println("Withdrawal amount must be positive.");
+            System.out.println("\nWithdrawal amount must be positive.");
         }
     }
 
@@ -221,11 +221,11 @@ public class ATMmachine {
 
                 case 4:
                     exit = true;
-                    System.out.println("Thank you for using the ATM. Goodbye!");
+                    System.out.println("\nThank you for using the ATM. Goodbye!");
                     break;
 
                 default:
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("\nInvalid option. Please try again.");
                     break;
             }
         }
@@ -242,19 +242,19 @@ public class ATMmachine {
         
         while (true) {
             System.out.println("\n----------Authentication----------");
-            System.out.print("Enter user ID: ");
+            System.out.print("Enter userID: ");
             String userId = sc.next();
 
             // Check for user's availability.
             if (!accounts.containsKey(userId)) {
-                System.out.println("\nAuthentication failed: User ID not found.");
+                System.out.println("\nAuthentication failed: UserID not found.");
                 return false;
             }
 
             currentAccount = accounts.get(userId);
 
             if (currentAccount.isLocked()) {
-                System.out.println("Account is locked due to too many failed attempts.");
+                System.out.println("\nAccount is locked due to too many failed attempts.");
                 return false;
             }
 
@@ -279,14 +279,14 @@ public class ATMmachine {
      * Checks and displays the current balance of the user's account.
      */
     private void checkBalance() {
-        System.out.printf("Current Balance: $%.2f\n", currentAccount.getBalance());
+        System.out.printf("\nCurrent Balance: $%.2f\n", currentAccount.getBalance());
     }
 
     /**
      * Handles the deposit operation by prompting for an amount and depositing it into the user's account.
      */
     private void handleDeposit() {
-        System.out.print("Enter amount to deposit: ");
+        System.out.print("\nEnter amount to deposit: ");
         double depositAmount = sc.nextDouble();
         currentAccount.deposit(depositAmount);
     }
@@ -295,7 +295,7 @@ public class ATMmachine {
      * Handles the withdrawal operation by prompting for an amount and withdrawing it from the user's account.
      */
     private void handleWithdrawal() {
-        System.out.print("Enter amount to withdraw: ");
+        System.out.print("\nEnter amount to withdraw: ");
         double withdrawAmount = sc.nextDouble();
 
         try {
